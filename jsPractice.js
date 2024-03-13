@@ -26,5 +26,22 @@ console.log(MI_CONST);
 // la const suele ser para numero predeterminados, como seg en un min y el valor de PI.
 console.log(Math.PI);
 
+function ageLimit(){
+    let ageInput = document.getElementById("age").value;
+    let age = new Date(ageInput);
+    let today = new Date();
+    let yearsOld = today.getFullYear() - age.getFullYear();
+    let monthDiff = today.getMonth() - age.getMonth();
 
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < age.getDate())) {
+        yearsOld--;
+    }
 
+    if (yearsOld < 18) {
+        alert("You are under age. Please go back where you came from!");
+            return false;
+    }
+    return true;
+}
+
+console.log();

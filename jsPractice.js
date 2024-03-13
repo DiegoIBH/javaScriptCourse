@@ -27,11 +27,12 @@ console.log(MI_CONST);
 console.log(Math.PI);
 
 function ageLimit(){
-    let ageInput = document.getElementById("age").value;
-    let age = new Date(ageInput);
-    let today = new Date();
-    let yearsOld = today.getFullYear() - age.getFullYear();
-    let monthDiff = today.getMonth() - age.getMonth();
+    var ageInput = document.getElementById("age").value;
+    console.log(ageInput);
+    var age = new Date(ageInput);
+    var today = new Date();
+    var yearsOld = today.getFullYear()-age.getFullYear();
+    var monthDiff = today.getMonth()-age.getMonth();
 
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < age.getDate())) {
         yearsOld--;
@@ -43,5 +44,3 @@ function ageLimit(){
     }
     return true;
 }
-
-console.log();

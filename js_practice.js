@@ -23,24 +23,8 @@ console.log(x);
 const MI_CONST = 10;
 //MI_CONST = 20; este cambio generara un error en consola
 console.log(MI_CONST);
-// la const suele ser para numero predeterminados, como seg en un min y el valor de PI.
-console.log(Math.PI);
+// la const suele ser para numero predeterminados, como seg en un min y el valor de PI.console.log(Math.PI);
 
-function ageLimit(){
-    var ageInput = document.getElementById("age").value;
-    console.log(ageInput);
-    var age = new Date(ageInput);
-    var today = new Date();
-    var yearsOld = today.getFullYear()-age.getFullYear();
-    var monthDiff = today.getMonth()-age.getMonth();
-
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < age.getDate())) {
-        yearsOld--;
-    }
-
-    if (yearsOld < 18) {
-        alert("You are under age. Please go back where you came from!");
-            return false;
-    }
-    return true;
+function calculateResult() {
+    return 2 + 2;
 }

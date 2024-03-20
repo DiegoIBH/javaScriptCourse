@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fetch API Sandbox</title>
+   
 </head>
 <body>
     <button id="getText">Get text</button>
@@ -11,7 +12,8 @@
     <button id="getFromUrl"> Clinical trail info</button>
     <button id="getLoopUrl"> Clinical trail Loop</button>
     <div id="output"></div>
-<script>
+    
+    <script>
     document.getElementById("getText").addEventListener("click", getText);
     document.getElementById("getUsers").addEventListener("click", getUsers);
     document.getElementById("getFromUrl").addEventListener("click", getFromUrl);
@@ -49,18 +51,17 @@
             document.getElementById("output").innerHTML = output;
         });
     }
-    const apiUrl='https://classic.clinicaltrials.gov/api/query/full_studies?expr=heart+attack&min_rnk=1&max_rnk=&fmt=json';
+    const apiUrl='https://classic.clinicaltrials.gov/api/query/full_studies?expr=heart+attack&min_rnk=1&max_rnk=10&fmt=json';
     function getFromUrl(){
         fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
             //one onbject restult
-            let study = data.FullStudiesResponse.FullStudies[0].Study.ProtocolSection.IdentificationModule;
+            let study = data.FullStudiesResponse.FullStudies[2].Study.ProtocolSection.IdentificationModule;
             let output = `<h2>Clinical Trial Web result on Heart Attack:</h2>
                             <ul>
                                 <li>NCTId: ${study.NCTId}</li>
                             </ul>`;
-                            console.log(data);
             document.getElementById("output").innerHTML = output;
         });
     };
@@ -69,18 +70,19 @@
     function getLoopUrl(){
         fetch(apiUrl2)
         .then((res) => res.json())
-        .then((data) => {
-            //one onbject restult
-            let i= 0;
-            let sum = 0;
-            let arrStudy = data.FullStudiesResponse.FullStudies;
-            let study = data.FullStudiesResponse.FullStudies[i].Study.ProtocolSection.IdentificationModule;
-            for (i < arrStudy.length; i++) {
-                FullStudies[i] += 1;
-            }
-            return FullStudies;
-        });console.log()
-    };
-</script>
+        .then((data) => { console.log(data);
+            let output = "<h2>Clinical Trial Web result on Heart Attack:</h2>";
+            let fetchArray = data.FullStudiesResponse.FullStudies;
+            function myFunction(path) {
+                output +=
+                `<ul>
+                    <li>NCTId:${path.Study.ProtocolSection.IdentificationModule.NCTId}</li>
+                </ul>`;
+            };
+            fetchArray.forEach(myFunction);
+            document.getElementById("output").innerHTML = output;
+        });
+    };      
+    </script>
 </body>
 </html>
